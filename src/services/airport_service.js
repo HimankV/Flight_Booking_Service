@@ -34,9 +34,9 @@ async function getAirports() {
   }
 }
 
-async function getAirport(airplaneId) {
+async function getAirport(airportId) {
   try {
-    const airport = await airportRepository.get(airplaneId);
+    const airport = await airportRepository.get(airportId);
     console.log(`airport: `, airport);
     return airport;
   } catch (error) {
@@ -50,9 +50,9 @@ async function getAirport(airplaneId) {
   }
 }
 
-async function deleteAirport(airplaneId) {
+async function deleteAirport(airportId) {
   try {
-    const airport = await airportRepository.destroy(airport);
+    const airport = await airportRepository.destroy(airportId);
     console.log(`Airplane deleted (inside service): `, airport);
     return airport;
   } catch (error) {
@@ -63,9 +63,9 @@ async function deleteAirport(airplaneId) {
   }
 }
 
-async function updateAirport(airplaneId, changes) {
+async function updateAirport(airportId, changes) {
   try {
-    const airport = await airportRepository.update(airport, changes);
+    const airport = await airportRepository.update(airportId, changes);
     console.log(`Airplane updated : `, airport);
     return airport;
   } catch (error) {

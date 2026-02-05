@@ -16,7 +16,9 @@ async function createAirport(req, res) {
     return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error;
-    return res.status(error.statusCode).json(ErrorResponse);
+    return res
+      .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+      .json(ErrorResponse);
   }
 }
 
@@ -28,7 +30,9 @@ async function getAirports(req, res) {
     return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error;
-    return res.status(error.statusCode).json(ErrorResponse);
+    return res
+      .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+      .json(ErrorResponse);
   }
 }
 
@@ -42,7 +46,9 @@ async function getAirport(req, res) {
     return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error;
-    return res.status(error.statusCode).json(ErrorResponse);
+    return res
+      .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+      .json(ErrorResponse);
   }
 }
 
@@ -55,22 +61,26 @@ async function deleteAirport(req, res) {
     return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error;
-    return res.status(error.statusCode).json(ErrorResponse);
+    return res
+      .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+      .json(ErrorResponse);
   }
 }
 
-async function updateAirplane(req, res) {
+async function updateAirport(req, res) {
   try {
     const airportId = req.params.airportId;
     const changes = req.body;
     console.log(`airportId, changes : `, airportId, " | ", changes);
-    const airport = await AirportService.updateAirplane(airportId, changes);
+    const airport = await AirportService.updateAirport(airportId, changes);
     console.log(`Airport deleted : `, airport);
     SuccessResponse.data = airport;
     return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error;
-    return res.status(error.statusCode).json(ErrorResponse);
+    return res
+      .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+      .json(ErrorResponse);
   }
 }
 
@@ -79,5 +89,5 @@ module.exports = {
   getAirports,
   getAirport,
   deleteAirport,
-  updateAirplane,
+  updateAirport,
 };

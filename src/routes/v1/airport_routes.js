@@ -1,12 +1,13 @@
 const express = require("express");
 const { AirportController } = require("../../controllers");
-// const { validateCreateRequest } =
-//   require("../../middlewares").AirportMiddlewares;
+const { validateCreateRequest } =
+  require("../../middlewares").AirportMiddlewares;
 const router = express.Router();
-router.post("/", AirportController.createAirport);
+// console.log(validateCreateRequest);
+router.post("/", validateCreateRequest, AirportController.createAirport);
 router.get("/", AirportController.getAirports);
-router.get("/:airplaneId", AirportController.getAirport);
-router.delete("/:airplaneId", AirportController.deleteAirport);
-router.patch("/:airplaneId", AirportController.updateAirplane);
+router.get("/:airportId", AirportController.getAirport);
+router.delete("/:airportId", AirportController.deleteAirport);
+router.patch("/:airportId", AirportController.updateAirport);
 
 module.exports = router;

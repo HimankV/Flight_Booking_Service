@@ -35,6 +35,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      departureTime: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
       price: {
         type: Sequelize.INTEGER,
         allowNull: false,
