@@ -1,29 +1,35 @@
 "use strict";
+const { BOOKED, CANCELLED, INITIATED, PENDING } =
+  require("../utils/common").Enums.BOOKING_STATUS;
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Airports", {
+    await queryInterface.createTable("Bookings", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
+      flightId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
       },
-      code: {
-        type: Sequelize.STRING,
+      userId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
       },
-      address: {
-        type: Sequelize.STRING,
-        unique: true,
+      status: {
+        type: Sequelize.ENUM,
+        values: [BOOKED, CANCELLED, INITIATED, PENDING],
+        defaultValue: INITIATED,
+        allowNull: false,
       },
-      cityId: {
+      totalCost: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      noOfSeats: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -38,6 +44,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Airports");
+    await queryInterface.dropTable("Bookings");
   },
 };

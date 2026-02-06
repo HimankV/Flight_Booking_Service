@@ -4,3 +4,10 @@ exports.SEAT_TYPE = {
   PREMIUM_ECONOMY: "premium-economy",
   FIRST_CLASS: "first-class",
 };
+
+exports.BOOKING_STATUS = {
+  BOOKED: "booked",
+  CANCELLED: "cancelled",
+  INITIATED: "initiated",
+  PENDING: "pending",
+};
