@@ -31,6 +31,24 @@ async function createBooking(req, res) {
   }
 }
 
+async function makePayment(req, res) {
+  console.log(`Request body : `, req.body);
+  try {
+    const booking = await BookingService.makePayment({
+      userId: Number(req.body.userId),
+      bookingId: Number(req.body.bookingId),
+      totalCost: Number(req.body.totalCost),
+    });
+    SuccessResponse.data = booking;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error;
+    return res
+      .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+      .json(ErrorResponse);
+  }
+}
+
 // async function getAllFlights(req, res) {
 //   try {
 //     console.log(`req.query : `, req.query);
@@ -77,4 +95,4 @@ async function createBooking(req, res) {
 //   }
 // }
 
-module.exports = { createBooking };
+module.exports = { createBooking, makePayment };
