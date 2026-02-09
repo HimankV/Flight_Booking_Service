@@ -128,4 +128,21 @@ async function cancelBooking(data) {
   }
 }
 
-module.exports = { createBooking, makePayment, cancelBooking };
+async function cancelOldBookings() {
+  try {
+    const currentTime = new Date(Date.now() - 1000 * 300);
+    console.log(`currentTime : `, currentTime);
+    const response = await bookingRepository.cancelOldBookings(currentTime);
+    console.log(`response : `, response);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+module.exports = {
+  createBooking,
+  makePayment,
+  cancelBooking,
+  cancelOldBookings,
+};

@@ -2,6 +2,7 @@ const express = require("express");
 const { PORT } = require("./config").ServerConfig;
 const apiRoutes = require("./routes");
 const { Logger } = require("./config");
+const { Crons } = require("./utils/common/");
 
 const app = express();
 
@@ -13,5 +14,5 @@ app.use("/api", apiRoutes);
 app.listen(PORT, async () => {
   console.log(`Server running on https://localhost:${PORT}`);
   Logger.info(`Successfully started the server`, `root`, {});
-  
+  Crons();
 });
